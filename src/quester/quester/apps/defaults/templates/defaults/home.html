@@ -15,11 +15,21 @@
 
 {% block extra-footer %}
 <script type="text/javascript">
-    var map = L.map('quest-map').setView([51.505, -0.09], 13);
+    var map = L.map('quest-map').setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
 
     L.tileLayer('http://{s}.tile.cloudmade.com/9e2c265c5893488d80f53cfb8a43370d/997/256/{z}/{x}/{y}.png', {
         attribution: '',
         maxZoom: 18
     }).addTo(map);
+
+
+    map.locate();
+    map.on('locationfound', function(data){
+
+        console.log(data);
+        map.setView([data.latlang.lat, data.latlang.lng], 13);
+    });
+
+
 </script>
 {% endblock extra-footer %}
