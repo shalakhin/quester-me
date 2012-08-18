@@ -1,7 +1,14 @@
 # Django settings for quester project.
+import os, sys
+
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+
+
+
+PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
