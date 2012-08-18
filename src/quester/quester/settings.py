@@ -157,6 +157,8 @@ LOGGING = {
         }
 }
 
+GEOIP_PATH = os.path.join(PROJECT_PATH, 'contrib/geo')
+
 try:
     from local_settings import *
     logging.debug("Local settings file found. Using it.")
