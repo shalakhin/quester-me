@@ -1,3 +1,5 @@
+{% load url from future %}
+
 <html>
     <head>
         <meta charset="utf-8">
@@ -36,9 +38,10 @@
             <div id="sign-in-up" class="reveal-modal">
               <h4>Welcome on the sign in/up page!</h4>
               <p>
-                <a href="#" class="round secondary button">Facebook</a>
-                <a href="#" class="round secondary button">Twitter</a>                
-                <a href="#" class="round secondary button">Google</a>
+                <a href="{% url 'socialauth_begin' 'facebook' %}" class="round secondary button">Facebook</a>
+                <a href="{% url 'socialauth_begin' 'twitter' %}" class="round secondary button">Twitter</a>
+                <a href="{% url 'socialauth_begin' 'google' %}" class="round secondary button">Google</a>
+                <a href="{% url 'socialauth_begin' 'github' %}" class="round secondary button">Github</a>
               </p>
             </div>
         <section>

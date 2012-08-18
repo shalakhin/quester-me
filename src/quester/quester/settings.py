@@ -6,11 +6,15 @@ from thirdparty_settings import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
+SOCIAL_AUTH_RAISE_EXCEPTIONS = DEBUG
 
 PROJECT_PATH = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../../'))
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGIN_ERROR_URL = '/login-error/'
 
 ADMINS = (
     ('Olexandr Shalakhin', 'olexandr@shalakhin.com'),
@@ -73,6 +77,15 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'social_auth.backends.contrib.github.GithubBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -81,7 +94,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    "django.core.context_processors.request"
+    "django.core.context_processors.request",
+    # third party stuff
+    'social_auth.context_processors.social_auth_by_name_backends',
+    'social_auth.context_processors.social_auth_backends',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'social_auth.context_processors.social_auth_login_redirect',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -116,6 +134,7 @@ INSTALLED_APPS = (
 
     'south',
     'django_countries',
+    'social_auth',
 
     'quest',
     'defaults',
