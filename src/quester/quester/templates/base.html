@@ -8,6 +8,8 @@
         {% block extra-head %}{% endblock extra-head %}
     </head>
     <body>
+        {# Testing location data #}
+        <p>{{ request.LOCATION_DATA }}</p>
         <ul class="nav-bar no-margin">
           <li class="active"><a href="#">Quester</a></li>
           <li class="has-flyout">

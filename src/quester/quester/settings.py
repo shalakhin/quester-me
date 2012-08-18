@@ -91,6 +91,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'defaults.middleware.InitializeMiddleware',
 )
 
 ROOT_URLCONF = 'quester.urls'
