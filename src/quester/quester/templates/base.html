@@ -10,7 +10,7 @@
     <body>
         {# Testing location data #}
         <p>{{ request.LOCATION_DATA }}</p>
-        <ul class="nav-bar no-margin">
+        <ul class="nav-bar no-margin animated fadeInDown">
           <li class="active"><a href="#">Quester</a></li>
           <li class="has-flyout">
             <a href="#">Playing</a>
@@ -28,6 +28,22 @@
                 <li><a href="#">Simple quest</a></li>
                 <li><a href="#">Other quest</a></li>
             </ul>
+          </li>
+          <li class="has-flyout">
+            <a href="#">Sign in</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <div class="flyout small">
+              <b>Sign in via:</b>
+              <p>
+                <a href="#" class="round secondary button">Facebook</a>
+              </p>
+              <p>
+                <a href="#" class="round secondary button">Twitter</a>                
+              </p>
+              <p>
+                <a href="#" class="round secondary button">Google</a>
+              </p>
+            </div>
           </li>
         </ul>
         <section>
