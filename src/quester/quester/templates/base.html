@@ -8,13 +8,13 @@
         {% block extra-head %}{% endblock extra-head %}
     </head>
     <body>
-        {# Testing location data #}
         <ul class="nav-bar no-margin animated fadeInDown" id="main-menu">
-          <li class="active"><a href="#">Quester.me</a></li>
+          <li class="active"><a href="#"><b>Quester.me</b></a></li>
           <li class="has-flyout">
             <a href="#">Playing</a>
             <a href="#" class="flyout-toggle"><span> </span></a>
             <ul class="flyout">
+              {# quests user play now #}
               <li><a href="#">Undeground</a></li>
               <li><a href="#">James Bond</a></li>
               <li><a href="#">Fooding</a></li>
@@ -24,30 +24,34 @@
             <a href="#">Create</a>
             <a href="#" class="flyout-toggle"><span> </span></a>
             <ul class="flyout">
+                {# list quest types user is able to create #}
                 <li><a href="#">Simple quest</a></li>
-                <li><a href="#">Other quest</a></li>
+                <li><a href="#">Chained quest</a></li>
             </ul>
           </li>
-          <li class="has-flyout">
-            <a href="#">Sign in</a>
-            <a href="#" class="flyout-toggle"><span> </span></a>
-            <div class="flyout small">
+          <li>
+            <a href="#" data-reveal-id="sign-in-up" data-animation="fadeAndPop" class="">Sign in/up</a>
+          </li>
+        </ul>
+            <div id="sign-in-up" class="reveal-modal">
+              <h4>Welcome on the sign in/up page!</h4>
               <p>
                 <a href="#" class="round secondary button">Facebook</a>
-              </p>
-              <p>
                 <a href="#" class="round secondary button">Twitter</a>                
-              </p>
-              <p>
                 <a href="#" class="round secondary button">Google</a>
               </p>
             </div>
-          </li>
-        </ul>
         <section>
             {% block content %}{% endblock content %}
         </section>
         {% block extra-footer %}{% endblock extra-footer %}
+        <script type="text/javascript">
+          $(document).ready(function() {
+            $('#sign-in-up').click(function() {
+              $('#sign-in-up').reveal();
+            });
+          });
+        </script>
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
         <script src="{{ STATIC_URL }}js/modernizr.foundation.js"></script>
         <script src="{{ STATIC_URL }}js/jquery.foundation.navigation.js"></script>
