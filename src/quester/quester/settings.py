@@ -1,5 +1,4 @@
 # Django settings for quester project.
-import logging
 import os, sys
 
 
