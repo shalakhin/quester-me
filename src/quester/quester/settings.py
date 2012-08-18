@@ -7,7 +7,8 @@ from thirdparty_settings import *
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
+PROJECT_PATH = os.path.normpath(os.path.join(os.path.abspath(os.path.dirname(__file__)), '../../../'))
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
 
 ADMINS = (
