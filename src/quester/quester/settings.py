@@ -1,6 +1,6 @@
 # Django settings for quester project.
-import os, sys
 import logging
+import os, sys
 
 
 DEBUG = True
@@ -123,28 +123,41 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 )
 
+
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
-    'filters': {
-        'require_debug_false': {
-            '()': 'django.utils.log.RequireDebugFalse'
-        }
-    },
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s] %(name)s: %(message)s'
+        },
+        },
     'handlers': {
+        'default': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(PROJECT_PATH, 'logs', 'quester.log'),
+            'maxBytes': 1024 * 1024 * 10,
+            'backupCount': 50,
+            'formatter': 'standard',
+            },
         'mail_admins': {
             'level': 'ERROR',
-            'filters': ['require_debug_false'],
             'class': 'django.utils.log.AdminEmailHandler'
         }
     },
     'loggers': {
+        '': {
+            'handlers': ['default'],
+            'level': 'DEBUG',
+            'propagate': True
+        },
         'django.request': {
             'handlers': ['mail_admins'],
             'level': 'ERROR',
             'propagate': True,
-        },
-    }
+            },
+        }
 }
 
 try:
