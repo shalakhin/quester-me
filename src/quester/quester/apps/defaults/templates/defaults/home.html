@@ -6,16 +6,20 @@
      <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.ie.css" />
  <![endif]-->
  <script src="http://cdn.leafletjs.com/leaflet-0.4/leaflet.js"></script>
- <script type="text/javascript">
-var map = L.map('quest-map');
 
-L.tileLayer('http://{s}.tile.cloudmade.com/9e2c265c5893488d80f53cfb8a43370d/997/256/{z}/{x}/{y}.png', {
-    attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-    maxZoom: 18
-}).addTo(map);
- </script>
 {% endblock extra-head %}
 
 {% block content %}
     <div id="quest-map"></div>
+
+
+<script type="text/javascript">
+    var map = L.map('quest-map').setView([51.505, -0.09], 13);
+
+    L.tileLayer('http://{s}.tile.cloudmade.com/9e2c265c5893488d80f53cfb8a43370d/997/256/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
+        maxZoom: 18
+    }).addTo(map);
+</script>
+
 {% endblock content %}
