@@ -1,12 +1,11 @@
 # Django settings for quester project.
 import logging
 import os, sys
-
+# thirdparty settings should be stored in thirdparty_settings.py
+from thirdparty_settings import *
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-
-
 
 PROJECT_PATH = os.path.abspath(os.path.dirname(__name__))
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'apps'))
