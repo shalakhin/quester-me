@@ -45,18 +45,18 @@ USE_L10N = True
 USE_TZ = True
 
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(PROJECT_PATH, 'media')
+MEDIA_ROOT = os.path.join(PROJECT_PATH, os.path.abspath(os.path.dirname(__file__)), 'media')
 
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
 
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+STATIC_ROOT = os.path.join(PROJECT_PATH, os.path.abspath(os.path.dirname(__file__)), 'static')
 
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
-    os.path.join(PROJECT_PATH, "static_dir"),
+    os.path.join(PROJECT_PATH, os.path.abspath(os.path.dirname(__file__)), "static_dir"),
 )
 
 STATICFILES_FINDERS = (
@@ -98,7 +98,7 @@ ROOT_URLCONF = 'quester.urls'
 WSGI_APPLICATION = 'quester.wsgi.application'
 
 TEMPLATE_DIRS = (
-    os.path.join(PROJECT_PATH, "templates")
+    os.path.join(PROJECT_PATH, os.path.abspath(os.path.dirname(__file__)), "templates")
 )
 
 INSTALLED_APPS = (
@@ -111,12 +111,13 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
-    'django.contrib.gis',
+    #'django.contrib.gis',
 
     'south',
     'django_countries',
 
-    'quest',
+    #'quest',
+    'defaults',
 )
 
 

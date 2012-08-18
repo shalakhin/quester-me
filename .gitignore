@@ -3,3 +3,6 @@
 *.pyc
 local_settings.py
 .idea/
+src/quester/quester/static/
+.DS_Store
+.sass-cache
