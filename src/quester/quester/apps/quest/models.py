@@ -1,5 +1,5 @@
 from django.contrib.gis.db import models
-
+from django_countries import CountryField
 
 QUEST_CHOICES = (
     ('O', 'One point quest'),
@@ -21,5 +21,27 @@ class Quest(models.Model):
 
     def __unicode__(self):
         return self.name
+
+
+class Address(models.Model):
+    num = models.IntegerField(blank=True, null=True)
+    street = models.CharField(max_length=100)
+    city = models.CharField(max_length=100)
+    country = CountryField()
+    zipcode = models.CharField(max_length=10, blank=True, null=True)
+
+
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+        return "Address obj at %s" % self.country
+
+class Marker(models.Model):
+    quest = models.ForeignKey(Quest)
+    address = models.ForeignKey(Address)
+
+    point = models.PointField()
+
+    objects = models.GeoManager()
 
 

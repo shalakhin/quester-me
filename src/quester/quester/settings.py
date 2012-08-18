@@ -102,6 +102,7 @@ INSTALLED_APPS = (
     'django.contrib.gis',
 
     'south',
+    'django_countries',
 
     'quest',
 )
