@@ -1,4 +1,5 @@
 # Django settings for quester project.
+import logging
 import os, sys
 
 
@@ -156,3 +157,9 @@ LOGGING = {
         },
     }
 }
+
+try:
+    from local_settings import *
+    logging.debug("Local settings file found. Using it.")
+except ImportError:
+    logging.debug("No local settings file. Using global.")
