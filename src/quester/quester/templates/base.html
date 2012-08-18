@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Quester.me</title>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/quester.css">
+        {% block extra-head %}{% endblock extra-head %}
+    </head>
+    <body>
+        <ul class="nav-bar no-margin">
+          <li class="active"><a href="#">Quester</a></li>
+          <li class="has-flyout">
+            <a href="#">Playing</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <ul class="flyout">
+              <li><a href="#">Undeground</a></li>
+              <li><a href="#">James Bond</a></li>
+              <li><a href="#">Fooding</a></li>
+            </ul>
+          </li>
+          <li class="has-flyout">
+            <a href="#">Create</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <ul class="flyout">
+                <li><a href="#">Simple quest</a></li>
+                <li><a href="#">Other quest</a></li>
+            </ul>
+          </li>
+        </ul>
+        <section>
+            {% block content %}{% endblock content %}
+        </section>
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+        <script src="{{ STATIC_URL }}js/modernizr.foundation.js"></script>
+        <script src="{{ STATIC_URL }}js/jquery.foundation.navigation.js"></script>
+        <script src="{{ STATIC_URL }}js/foundation.min.js"></script>
+        <script type="text/javascript">$(document).foundationNavigation();</script>
+    </body>
+</html>
