@@ -38,9 +38,9 @@ class Address(models.Model):
 
 class Marker(models.Model):
     quest = models.ForeignKey(Quest)
-    address = models.ForeignKey(Address)
+    address = models.ForeignKey(Address, blank=True, null=True)
 
-    point = models.PointField()
+    point = models.PointField(srid=4326)
 
     objects = models.GeoManager()
 
