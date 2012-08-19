@@ -24,6 +24,18 @@ def nearest_quests(request):
         return HttpResponseBadRequest("lat and lon must be provided")
     u_location = fromstr('POINT(%s %s)' % (lat, lon))
     marker_list = Marker.objects.filter(point__distance_lte=(u_location, D(km=distance or 1)))
+    r = 0.05
+    import random
+    if not marker_list:
+        for i in xrange(100):
+            m = Marker()
+            def _rpoint(x):
+                return random.uniform(float(x) - r * 2.14, float(x) + r * 2.14)
+            m.point = fromstr('Point(%f %f)' % (_rpoint(lat), _rpoint(lon)))
+            m.quest = Quest.objects.get(id=1)
+            m.save()
+    marker_list = Marker.objects.filter(point__distance_lte=(u_location, D(km=distance or 1)))
+
     response = []
     for marker in marker_list:
         response.append({

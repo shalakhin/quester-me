@@ -1,6 +1,7 @@
 from django import forms
 from quest.models import Quest
 
+
 class QuestForm(forms.ModelForm):
 
     class Meta:
