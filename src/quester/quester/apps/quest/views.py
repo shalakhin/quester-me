@@ -11,9 +11,9 @@ from quest.models import Quest, Marker
 def nearest_quests(request):
 	if not request.is_ajax():
 		return HttpResponseBadRequest("Must be AJAX")
-	lat = request.POST.get('lat')
-	lon = request.POST.get('lon')
-	distance = request.POST.get('distance')
+	lat = request.GET.get('lat')
+	lon = request.GET.get('lon')
+	distance = request.GET.get('distance')
 	if not lat or not lon:
 		return HttpResponseBadRequest("lat and lon must be provided")
 	u_location = fromstr('POINT(%s %s)' % (lat, lon))
@@ -21,11 +21,13 @@ def nearest_quests(request):
 	response = []
 	for marker in marker_list:
 		response.append({
+			"quest_id": marker.quest.id,
 			"name": marker.quest.name,
 			"desc": marker.quest.description,
 			"type": marker.quest.get_type_display(),
-			"level": marker.quest.difficulty_level,
-			"point": marker.point.coords,
+			"level": marker.quest.get_difficulty_level_display(),
+			"lat": marker.point.coords[0],
+			"lon": marker.point.coords[1],
 			"address": marker.address
 		})
-	return HttpResponse(response, mimetype='application/json')
+	return HttpResponse(json.dumps(response), mimetype='application/json')
