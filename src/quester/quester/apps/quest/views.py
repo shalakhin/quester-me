@@ -57,7 +57,7 @@ def quest_form(request):
     f = QuestForm()
     c = dict()
     c['f'] = f
-    t = loader.get_template('quest_form.html')
+    t = loader.get_template('quest/quest_form.html')
     html = t.render(Context(c))
     data = {'html': html, 'success': True}
     return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')
