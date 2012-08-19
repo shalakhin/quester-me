@@ -16,6 +16,8 @@ LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGIN_ERROR_URL = '/login-error/'
 
+AUTH_PROFILE_MODULE = 'profiles.UserProfile'
+
 ADMINS = (
     ('Olexandr Shalakhin', 'olexandr@shalakhin.com'),
     ('Alexandr Bulanov', 'alexandr.bulanov@djangostars.com'),
@@ -138,6 +140,7 @@ INSTALLED_APPS = (
 
     'quest',
     'defaults',
+    'profiles',
 )
 
 

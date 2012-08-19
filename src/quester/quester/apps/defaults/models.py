@@ -10,6 +10,7 @@ USER_POSITION_TYPE = (
     ('BR', 'By browser'),
 )
 
+
 class UserPosition(models.Model):
     user = models.OneToOneField(User)
     address = models.ForeignKey(Address, blank=True, null=True)
