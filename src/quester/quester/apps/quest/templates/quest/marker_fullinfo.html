@@ -1,0 +1,11 @@
+<h4>{{ marker.quest.name }}</h4>
+<p>{{ marker.quest.description }}</p>
+<p>{{ marker.quest.get_type_display}}</p>
+{% if marker.address %}
+	<ul>
+		<li>{{ marker.address.county }}, {{ marker.address.street }}, {{ marker.address.num }}</li>
+		<li></li>
+		<li></li>
+		<li></li>
+	</ul>
+{% endif %}

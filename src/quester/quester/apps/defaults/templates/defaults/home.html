@@ -65,24 +65,31 @@
         $.get("/ajax/nearest_quests/", post_data, function(data){
             for (var i=0; i<data.length; i++){
                 var marker_data = data[i];
-                L.marker(
+                var marker = L.marker(
                     [marker_data.lon, marker_data.lat],
                     {
-                        title: marker_data.name
+                        title: marker_data.name,
+                        marker_id: marker_data.marker_id,
                     }
                 ).
                 addTo(map).bindPopup(
                     "<b>"+marker_data.name+"</b><br><p><b>Type:</b> "+marker_data.type+"</p><p><b>Difficalt:</b> "+marker_data.level+"</p><p><a id='"+marker_data.quest_id+"' href='#' class='tiny button'>Play quest</a></p>"
-                );
+                ).
+                addEventListener('click', function(){
+                    $('.tiny, .button').click(function(evnt){
+                        $.get("/ajax/marker_fullinfo/", {"marker_id": marker.options.marker_id}, function(data){
+                            $(".leaflet-popup-content-wrapper").html(data);
+                            $(".leaflet-popup-content-wrapper").css("width", 400);
+                            $(".leaflet-popup-content-wrapper").css("heigth", 100);
+
+                        });
+                    });
+                    marker.addTo(map).bindPopup(
+                            "<b>"+marker_data.name+"</b><br><p><b>Type:</b> "+marker_data.type+"</p><p><b>Difficalt:</b> "+marker_data.level+"</p><p><a id='"+marker_data.quest_id+"' href='#' class='tiny button'>Play quest</a></p>"
+                        )
+                });
             };
         });
-    });
-
-    $(document).ready(function() {
-        $('.tiny').live("click", function(){
-            $('#myModal').reveal();
-        });
-
     });
 
 
