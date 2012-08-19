@@ -14,11 +14,35 @@
 
 {% block extra-footer %}
 <script type="text/javascript">
-    var map = L.map('quest-map', {zoomControl: false}).setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
+    var map = L.map('quest-map').setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
+    var marker = L.marker([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}]).addTo(map);
+    var circle = L.circle([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 1400, {
+        color: 'blue',
+        weight: 1,
+        fillColor: 'blue',
+        fillOpacity: 0.1
+    }).addTo(map);
+
+    L.control.zoom({position:'bottomleft'}).addTo(map);
+
+
     L.tileLayer('http://{s}.tile.cloudmade.com/9e2c265c5893488d80f53cfb8a43370d/997/256/{z}/{x}/{y}.png', {
         attribution: '',
         maxZoom: 18
     }).addTo(map);
-    L.control.zoom({position:'bottomleft'}).addTo(map);
+
+
+    map.locate();
+    map.on('locationfound', function(data){
+
+        map.setView([data.latlng.lat, data.latlng.lng], 13);
+        var latlng = data.latlng;
+        marker.setLatLng(latlng);
+        marker.update();
+        circle.setLatLng(latlng);
+        circle.setRadius(1000);
+    });
+
+
 </script>
 {% endblock extra-footer %}
