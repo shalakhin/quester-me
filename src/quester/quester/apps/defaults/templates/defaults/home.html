@@ -10,6 +10,14 @@
 
 {% block content %}
     <div id="quest-map"></div>
+
+    <div id="myModal" class="reveal-modal">
+        <h2>Awesome. I have it.</h2>
+        <p class="lead">Your couch.  I it's mine.</p>
+        <p>Im a cool paragraph that lives inside of an even cooler modal. Wins</p>
+        <a class="close-reveal-modal">&#215;</a>
+    </div>
+
 {% endblock content %}
 
 {% block extra-footer %}
@@ -52,6 +60,27 @@
         marker.update();
         circle.setLatLng(latlng);
         circle.setRadius(1000);
+    });
+
+
+
+    {% for marker in markers %}
+        var marker_data = {{ marker.geojson|safe }};
+        L.marker([marker_data.coordinates[1], marker_data.coordinates[0]], {
+            title: "{{ marker.quest.name }}"
+
+        }).addTo(map).bindPopup("<b>{{ marker.quest.name }}</b><br><p><b>Type:</b> {{ marker.quest.get_type_display }}</p><p><b>Difficalt:</b> {{ marker.quest.get_difficulty_level_display }}</p><p><a id='{{ marker.quest.id }}' href='#' class='tiny button'>Play quest</a></p>");
+    {% endfor %}
+
+    $(document).ready(function() {
+        console.log("here");
+
+
+        $('.tiny').live("click", function(){
+            console.log(this);
+            $('#myModal').reveal();
+        });
+
     });
 
 
