@@ -1,16 +1,15 @@
-{% load url from future %}
-
-<html>
+{% load url from future %}<html>
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Quester.me</title>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/foundation.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/font-awesome.css">
         <link rel="stylesheet" href="{{ STATIC_URL }}css/quester.css">
         {% block extra-head %}{% endblock extra-head %}
     </head>
     <body>
-        <ul class="nav-bar no-margin animated fadeInDown" id="main-menu">
+        <ul class="nav-bar animated fadeInDown" id="main-menu">
           <li class="active"><a href="#"><b>Quester.me</b></a></li>
           <li class="has-flyout">
             <a href="#">Playing</a>
@@ -31,17 +30,34 @@
                 <li><a href="#">Chained quest</a></li>
             </ul>
           </li>
+          {% if request.user.is_authenticated %}
+          <li class="has-flyout">
+            <a href="#">My profile</a>
+            <a href="#" class="flyout-toggle"><span> </span></a>
+            <div class="flyout small">
+              <h4>{{ request.user.username }}</h4>
+              <p>
+                {# <img src="http://placehold.it/100x100" alt=""> #}
+              </p>
+              <p>
+                <a href="{% url 'logout-page' %}" class="round tiny button">Logout</a>
+              </p>
+              {# user statistics and link to achievements here #}
+            </div>
+          </li>
+          {% else %}
           <li>
             <a href="#" data-reveal-id="sign-in-up" data-animation="fadeAndPop" class="">Sign in/up</a>
           </li>
+          {% endif %}
         </ul>
-            <div id="sign-in-up" class="reveal-modal">
-              <h4>Welcome on the sign in/up page!</h4>
+            <div id="sign-in-up" class="reveal-modal centered">
+              <h5>Welcome on the sign in/up page!</h5>
               <p>
-                <a href="{% url 'socialauth_begin' 'facebook' %}" class="round secondary button">Facebook</a>
-                <a href="{% url 'socialauth_begin' 'twitter' %}" class="round secondary button">Twitter</a>
-                <a href="{% url 'socialauth_begin' 'google' %}" class="round secondary button">Google</a>
-                <a href="{% url 'socialauth_begin' 'github' %}" class="round secondary button">Github</a>
+                <a href="{% url 'socialauth_begin' 'facebook' %}"><i class="icon-facebook-sign large-font"></i></a>
+                <a href="{% url 'socialauth_begin' 'twitter' %}"><i class="icon-twitter-sign large-font"></i></a>
+                <a href="{% url 'socialauth_begin' 'google' %}"><i class="icon-google-plus-sign large-font"></i></a>
+                <a href="{% url 'socialauth_begin' 'github' %}"><i class="icon-github-sign large-font"></i></a>
               </p>
             </div>
         <section>
