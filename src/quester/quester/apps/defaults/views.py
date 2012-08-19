@@ -6,6 +6,8 @@ def home(request):
     """
         Handle main page stuff
     """
+    c = dict()
+    #TODO: get actual user location if it possible using UserLocation model
 
     return render(request, 'defaults/home.html')
 
@@ -17,3 +19,7 @@ def logout(request):
 
     django_logout(request)
     return redirect('home')
+
+def get_user_location(request):
+    user_location = request.user.user_location
+    print user_location
