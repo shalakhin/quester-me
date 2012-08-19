@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^$', 'defaults.views.home', name='home'),
     url(r'^logout/$', 'defaults.views.logout', name='logout-page'),
     url(r'', include('social_auth.urls')),
+    url(r'^ajax/get_user_location', 'defaults.views.get_user_location', name='get_user_location'),
 )

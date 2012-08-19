@@ -14,9 +14,15 @@
 
 {% block extra-footer %}
 <script type="text/javascript">
-    var map = L.map('quest-map', {zoomControl: false}).setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
-    var marker = L.marker([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}]).addTo(map);
-    var circle = L.circle([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 1400, {
+
+    var lat = '{{ request.LOCATION_DATA.latitude }}';
+    var lng = '{{ request.LOCATION_DATA.longitude }}';
+    lat = parseFloat(lat);
+    lng = parseFloat(lng);
+
+    var map = L.map('quest-map', {zoomControl: false}).setView([lat, lng], 13);
+    var marker = L.marker([lat, lng]).addTo(map);
+    var circle = L.circle([lat, lng], 1400, {
         color: 'blue',
         weight: 1,
         fillColor: 'blue',
@@ -33,7 +39,11 @@
     }).addTo(map);
 
 
-    map.locate();
+    map.locate({
+        watch: true,
+        maximumAge: 60,
+        enableHighAccuracy: true
+    });
     map.on('locationfound', function(data){
 
         map.setView([data.latlng.lat, data.latlng.lng], 13);
