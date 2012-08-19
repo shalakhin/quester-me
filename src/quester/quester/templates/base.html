@@ -12,6 +12,7 @@
     <body>
         <ul class="nav-bar animated fadeInDown" id="main-menu">
           <li class="active"><a href="#"><b>Quester.me</b></a></li>
+          {% if request.user.is_authenticated %}
           <li class="has-flyout">
             <a href="#">Playing</a>
             <a href="#" class="flyout-toggle"><span> </span></a>
@@ -32,6 +33,7 @@
                 {% endfor %}
             </ul>
           </li>
+          {% endif %}
           {% if request.user.is_authenticated %}
           <li class="has-flyout">
             <a href="#">My profile</a>
