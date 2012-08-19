@@ -3,7 +3,7 @@ from django.contrib.auth import logout as django_logout
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import *
 
-from quest.models import Quest, Marker
+from quest.models import Quest, Marker, QUEST_CHOICES
 
 def home(request):
     """
@@ -16,6 +16,9 @@ def home(request):
     pnt = fromstr('POINT(%s %s)' % (str(request.LOCATION_DATA['longitude']), str(request.LOCATION_DATA['latitude'])), srid=4326)
     markers = Marker.objects.filter(point__distance_lte=(pnt, D(km=10))).geojson()
     c['markers'] = markers
+
+    c['quest_choices'] = QUEST_CHOICES
+    print c['quest_choices']
 
     return render(request, 'defaults/home.html', c)
 
