@@ -21,5 +21,7 @@ def logout(request):
     return redirect('home')
 
 def get_user_location(request):
-    user_location = request.user.user_location
-    print user_location
+    pass
+
+def set_user_location(request):
+    pass
