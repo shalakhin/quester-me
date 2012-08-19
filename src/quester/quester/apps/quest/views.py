@@ -1,13 +1,15 @@
 import json
+from django.core.urlresolvers import reverse
 
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseBadRequest
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import fromstr, GEOSGeometry
 from django.template import loader
-from django.template.context import Context
+from django.template.context import Context, RequestContext
 from django.template.loader import render_to_string
 from django.utils import simplejson
+from django.views.decorators.csrf import csrf_protect
 
 from quest.models import Quest, Marker
 
@@ -53,11 +55,28 @@ def marker_fullinfo(request):
     return HttpResponse(render_to_string("quest/marker_fullinfo.html", data))
 
 from quest.forms import QuestForm
+
+@ csrf_protect
 def quest_form(request):
+
+
+    f = QuestForm(request.POST or None)
+
+    if request.method == 'POST':
+        if f.is_valid():
+            f.save()
+            return redirect(reverse('home'))
+        else:
+            print 'here'
+
     f = QuestForm()
-    c = dict()
-    c['f'] = f
+    c = RequestContext(request, {
+        'f': f,
+    })
     t = loader.get_template('quest/quest_form.html')
     html = t.render(Context(c))
     data = {'html': html, 'success': True}
+
+
+
     return HttpResponse(simplejson.dumps(data), mimetype='application/javascript')

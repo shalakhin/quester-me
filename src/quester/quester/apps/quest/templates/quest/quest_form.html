@@ -1,7 +1,7 @@
-
+{% load url from future %}
 
 <h5>Create yor awesome Quest </h5>
-<form action="">
+<form method="post" action="{% url 'quest_form' %}">{% csrf_token %}
     {{ f.as_p }}
 
     <input type="submit" class="button" value="Save">
