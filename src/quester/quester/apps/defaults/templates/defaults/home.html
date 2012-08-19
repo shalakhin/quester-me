@@ -14,7 +14,7 @@
 
 {% block extra-footer %}
 <script type="text/javascript">
-    var map = L.map('quest-map').setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
+    var map = L.map('quest-map', {zoomControl: false}).setView([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 13);
     var marker = L.marker([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}]).addTo(map);
     var circle = L.circle([{{ request.LOCATION_DATA.latitude }}, {{ request.LOCATION_DATA.longitude }}], 1400, {
         color: 'blue',
